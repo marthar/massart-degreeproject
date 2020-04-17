@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 import Tabletop from "tabletop"
 
-import { map, keys } from "lodash"
+import { map, keys, find } from "lodash"
 
 import {
   HashRouter as Router,
@@ -40,7 +40,7 @@ function processEntries(data) {
 
      /*
      */
-     console.log(entry)
+     console.log(keys(entry))
 
      let thumb = entry["Poster Thumbnail"];
      let poster = entry["Poster Full Size"];
@@ -55,10 +55,12 @@ function processEntries(data) {
      let youtube = slugs[slugs.length-1]
 
      return {
-       id: idx,
+       id: entry['Last Name'].toLowerCase(),
        thumb: thumb,
        poster: poster,
-       name: entry['Your Full Name'],
+       first_name: entry['First Name'],
+       last_name: entry['Last Name'],
+       name: `${entry['First Name']} ${entry['Last Name']}`,
        abstract: entry["Abstract"],
        time: entry["Time"],
        room: entry["Room Link"],
@@ -72,7 +74,7 @@ function processEntries(data) {
 
 function GalleryDetail({entries}) {
   let { id } = useParams();
-  let entry= entries[id];
+  let entry= find(entries, (entry) => entry.id == id.toLowerCase())
 
 
 
