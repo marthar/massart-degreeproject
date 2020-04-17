@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/massart-portfolios/static/css/main.70f39561.chunk.css",
+    "main.js": "/massart-portfolios/static/js/main.5105147c.chunk.js",
+    "main.js.map": "/massart-portfolios/static/js/main.5105147c.chunk.js.map",
+    "runtime-main.js": "/massart-portfolios/static/js/runtime-main.03d420b9.js",
+    "runtime-main.js.map": "/massart-portfolios/static/js/runtime-main.03d420b9.js.map",
+    "static/js/2.f226cda7.chunk.js": "/massart-portfolios/static/js/2.f226cda7.chunk.js",
+    "static/js/2.f226cda7.chunk.js.map": "/massart-portfolios/static/js/2.f226cda7.chunk.js.map",
+    "index.html": "/massart-portfolios/index.html",
+    "precache-manifest.d4335b7d776ea6943b830092b156ae32.js": "/massart-portfolios/precache-manifest.d4335b7d776ea6943b830092b156ae32.js",
+    "service-worker.js": "/massart-portfolios/service-worker.js",
+    "static/css/main.70f39561.chunk.css.map": "/massart-portfolios/static/css/main.70f39561.chunk.css.map",
+    "static/js/2.f226cda7.chunk.js.LICENSE.txt": "/massart-portfolios/static/js/2.f226cda7.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.03d420b9.js",
+    "static/js/2.f226cda7.chunk.js",
+    "static/css/main.70f39561.chunk.css",
+    "static/js/main.5105147c.chunk.js"
+  ]
+}
