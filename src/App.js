@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 import Tabletop from "tabletop"
 
-import { map, keys, find } from "lodash"
+import { map, keys, find, filter, sortBy, groupBy, uniqBy } from "lodash"
 
 import {
   HashRouter as Router,
@@ -15,20 +15,26 @@ import {
   useParams
 } from "react-router-dom";
 
+import {
+  parse
+} from "date-fns"
 
 
 const initialState = {
   detail: null,
-  entries: []
+  entries: [],
+  search: "",
+  view: "posters"
 }
 
 const viewReducer = (state, action) => {
   switch(action.type) { 
     case "ENTRIES":
       return { ...state, entries: action.entries }
+    case "SEARCH":
+      return { ...state, search: action.value }
     case "VIEW":
-      console.log(action)
-      return { ...state, detail: action.id }
+      return { ...state, view: action.value }
     default:
       return state;
 
@@ -37,10 +43,6 @@ const viewReducer = (state, action) => {
 
 function processEntries(data) {
    let entries = map(data, (entry,idx) => { 
-
-     /*
-     */
-     console.log(keys(entry))
 
      let thumb = entry["Poster Thumbnail"];
      let poster = entry["Poster Full Size"];
@@ -54,22 +56,29 @@ function processEntries(data) {
      let slugs = (entry["YouTube Link"]||"").split("/")
      let youtube = slugs[slugs.length-1]
 
+     const name = `${entry['First Name']} ${entry['Last Name']}`;
+
+     let startTime = (entry["Time"]||"").split("–")[0];
+     startTime = parse(startTime,'h:mma', new Date())
+
      return {
+       key: idx,
        id: entry['Last Name'].toLowerCase(),
        thumb: thumb,
        poster: poster,
        first_name: entry['First Name'],
        last_name: entry['Last Name'],
-       name: `${entry['First Name']} ${entry['Last Name']}`,
+       name: name,
+       search: name.toLowerCase(),
        abstract: entry["Abstract"],
        time: entry["Time"],
        room: entry["Room Link"],
        youtube: youtube,
-       title: entry["Title"]
+       title: entry["Title"],
+       start_time: startTime
      }
    })
-   console.log(entries)
-   return  entries
+   return sortBy(entries, (entry) => `${entry.last_name.toLowerCase()}-${entry.first_name.toLowerCase()}`);
 }
 
 function GalleryDetail({entries}) {
@@ -114,7 +123,7 @@ function GalleryDetail({entries}) {
 }
 
 function GalleryItem({entry}) {
-  return  <Link to={`/${entry.id}`}>
+  return  <Link key={entry.key} to={`/${entry.id}`}>
               <div className="piece" >
                 <div className='piece-image'><img src={entry.thumb} /></div>  
                 <h1>{entry.title}</h1>
@@ -124,21 +133,41 @@ function GalleryItem({entry}) {
 }
 
 
-function renderContent(detail,entries,dispatch) {
-  if(detail !== null) {
-    return 
-  } else {
-    return  <React.Fragment>
-     
-    </React.Fragment>
-  }
+function TimeView({entries}) {
+   const groupedEntries = groupBy(entries, (entry) => entry.start_time.toString())
+
+   let times = map(entries, (entry) => [ entry.start_time, entry.time ] );
+   times = uniqBy(times, (time) => time[0].toString())
+   times = sortBy(times, (time) => time[0])
+
+   return <div className="times">
+     { map(times, (time) => {
+       return <div key={time[0]} className="time">
+         <div className="time--time">{time[1]}</div>
+         <div className="time--names">
+           {map(groupedEntries[time[0].toString()], (entry) => <div key={entry.key} className="time--name"><Link to={`/${entry.id}`}>{entry.name}</Link></div>)}
+         </div>
+       </div>; 
+     }) }
+   </div>
 }
+
+
+function runSearch(entries, search) {
+  let q = search.toLowerCase()
+  return filter(entries, (entry) => {
+    return entry.search.includes(q)
+  })
+}
+
 
 function App() {
   const [
     {
       detail,
-      entries
+      entries,
+      search,
+      view
     },
     dispatch
   ] = useReducer(viewReducer, initialState)
@@ -164,13 +193,20 @@ function App() {
               <h1>Degree Project <br/>Symposium</h1>
               <h2>MassArt Communication Design Senior Class</h2>
             </header>
-            <section id="gallery">
-              {map(entries, (entry,index) => <GalleryItem entry={entry} key={index} />) }
+            <section id='search'>
+              <input type='name' className="search" value={search} placeholder="Student Name" onChange={(e)=>dispatch({type:"SEARCH", value:e.currentTarget.value}) }/>
+              <button className={`view-button ${view == 'posters' && "view-button--active"}`} onClick={() => dispatch({type:"VIEW",value:"posters"}) }>Posters</button>
+              <button className={`view-button ${view == 'times' && "view-button--active"}`} onClick={() => dispatch({type:"VIEW",value:"times"}) }>Times</button>
             </section>
+            { view == 'posters' && <section id="gallery">
+              {map(runSearch(entries,search), (entry,index) => <GalleryItem entry={entry} key={index} />) }
+            </section> }
+            { view == 'times' && <section id='time'>
+              <TimeView entries={runSearch(entries,search)} />
+              </section>}
           </Route>
           <Route path="/:id" children={<GalleryDetail entries={entries} />} />
         </Switch>
-        {renderContent(detail,entries, dispatch)}
       <footer>
         <h3><img src="./light-logo.png" />621 Huntington Avenue, Boston, MA, 02115 | 617.879.7000 | </h3>
       </footer>
