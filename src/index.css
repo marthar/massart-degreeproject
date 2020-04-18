@@ -530,11 +530,11 @@ header h3 {
 }
 
 #gallery {
-  display: grid;
-  grid-gap: 1rem;
-  grid-template-columns: repeat(auto-fill, minmax(200px, auto));
-  grid-auto-rows: minmax(fit-content, auto);
   margin-top: 30px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-rows: repeat(6, auto);
+  grid-gap: 1.5rem;
 }
 
 #gallery a { text-decoration:none;}
@@ -543,12 +543,13 @@ header h3 {
   position:relative;
   height:0px;
   padding-bottom:133%;
+  margin-bottom:10px;
 }
 
 
 #gallery img {
  border:3px solid white;
- max-width:100%;
+ width:100%;
  display:block;
  position:absolute;
  top:0px;
