@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "fb51c6422fb5e9cf8d9f95b38ac1ef84",
+    "revision": "55ee97fec85cf9e92cc3db519ecef9d1",
     "url": "/massart-portfolios/index.html"
   },
   {
-    "revision": "e9a6ab4ab9a66aa5763b",
+    "revision": "80dce3a6ffe752527da7",
     "url": "/massart-portfolios/static/css/main.5bebff64.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/massart-portfolios/static/js/2.f226cda7.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "e9a6ab4ab9a66aa5763b",
-    "url": "/massart-portfolios/static/js/main.5105147c.chunk.js"
+    "revision": "80dce3a6ffe752527da7",
+    "url": "/massart-portfolios/static/js/main.e3e66890.chunk.js"
   },
   {
     "revision": "f84db9247f377f6403d9",
