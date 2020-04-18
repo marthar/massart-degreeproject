@@ -537,6 +537,7 @@ header h3 {
   grid-gap: 1.5rem;
 }
 
+
 #gallery a { text-decoration:none;}
 
 #gallery .piece-image {
@@ -631,4 +632,13 @@ footer img {
 }
 
 
+@media only screen and (max-width:600px) {
+  body {
+    width:auto;
+    padding:0 10px;
+  }
+  #gallery {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+}
 
