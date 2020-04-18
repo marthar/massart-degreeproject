@@ -162,7 +162,7 @@ function App() {
             <header>
               <h3>Online Symposium May 12th 2020</h3>
               <h1>Degree Project <br/>Symposium</h1>
-              <h2>Communication Design Senior Class</h2>
+              <h2>MassArt Communication Design Senior Class</h2>
             </header>
             <section id="gallery">
               {map(entries, (entry,index) => <GalleryItem entry={entry} key={index} />) }
@@ -172,7 +172,7 @@ function App() {
         </Switch>
         {renderContent(detail,entries, dispatch)}
       <footer>
-        <h3><img src="light-logo.png" />621 Huntington Avenue, Boston, MA, 02115 | 617.879.7000 | </h3>
+        <h3><img src="./light-logo.png" />621 Huntington Avenue, Boston, MA, 02115 | 617.879.7000 | </h3>
       </footer>
      </div>
     </Router>
