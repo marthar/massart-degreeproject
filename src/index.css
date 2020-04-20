@@ -257,6 +257,8 @@ textarea {
   color: inherit; /* 1 */
   font: inherit; /* 2 */
   margin: 0; /* 3 */
+  padding: 5px;
+  background-color:inherit;
 }
 
 /**
@@ -429,6 +431,7 @@ body {
   margin:0 auto;
   width:80%;
   max-width:1100px;
+  font-family: 'Fanwood Text', serif;
 }
 
 a { 
@@ -445,8 +448,12 @@ p {
 
 h1,h2,h3 {  font-weight:lighter; margin:0;
   }
-header {
 
+input {
+  margin-right:50px;
+}
+header {
+ position:relative;
 }
 
 header h1 {
@@ -454,6 +461,8 @@ header h1 {
   font-size: 4em;
   margin-left: -5px;
   line-height:1em;
+  letter-spacing: -.02em;
+  word-spacing: -.04em;
 }
 
 header h2 {
@@ -474,8 +483,47 @@ header h3 {
     
 }
 
+header #search { 
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    margin-right: 0px;
+    /* border-radius: 3px; */
+}
+
+header .search-icon {
+  position:absolute;
+  right:0px;
+  bottom:8px;
+}
+header .search {
+    margin-right:0px;
+    padding-right:20px;
+    border: none;
+    /* padding: 5px 10px; */
+    color: #222;
+    text-align: right;
+    font-size: .9em;
+    border-bottom: 2px solid #333;
+    text-transform: uppercase;
+    font-family: 'Hammersmith One', sans-serif;
+    font-size: .8em;
+    letter-spacing:.1em;
+}
+
+header .search:focus {
+  outline:none;
+}
+
+
+header .view {
+  position:absolute;
+  right:0px;
+  bottom:0px;
+}
+
 .back {
-  font-size:.7em;
+  font-size:.9em;
   cursor:pointer;
   margin:0px;
   padding-top:30px;
@@ -488,27 +536,58 @@ header h3 {
   top: -1px;
   color: #ffb487;
 }
-.piece{
-  margin-top: 20px;
-}
 
 
 
-.time {
+
+.time-block{
     font-family: 'Hammersmith One', sans-serif;
-    font-size: .6em;
+    font-size: .8em;
     text-transform: uppercase;
     letter-spacing: .05em;
-    margin-top: 20px;
-    height: 40px;
+    margin-top: 30px;
+    color:#222222;
+    display:flex;
+    justify-content: space-between;
 }
 
-.time h2 { 
-  float:left;
+.time-block h2 { 
   padding: 10px 15px;
-  padding:10px 35px 10px 0;
+  
 }
 
+.button {
+  padding:10px 15px;
+  border:1px solid black;
+}
+
+.time--name {
+  font-family: 'Fanwood Text', serif;
+  text-transform: none;
+  font-size:1.5rem;
+  letter-spacing: 0;
+  margin-bottom: 5px;
+}
+
+.time--name a {
+  text-decoration:none;
+}
+
+.time--name a:hover {
+  text-decoration:underline;
+  text-decoration-color:#ffb487;
+}
+
+.time--time {
+  margin-bottom:5px;
+  color:#222222;
+  font-family: 'Hammersmith One', sans-serif;
+  font-size: .8em;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  margin-top:50px;
+  color:#222;
+}
 .time a .button { 
   padding:10px 15px;
   border:1px solid black;
@@ -530,12 +609,26 @@ header h3 {
 }
 
 #gallery {
-  margin-top: 30px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 250px));
+  /*display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px,auto));
   grid-template-rows: repeat(6, auto);
-  grid-gap: 1.5rem;
+  grid-gap: 1.5rem;*/
+  display:flex;
+  flex-wrap:wrap;
+  box-sizing:border-box;
+  margin:50px -10px 0 -10px;
 }
+
+#gallery a {
+  margin-top: 20px;
+  flex: 0 0 33%;
+  box-sizing:border-box;
+}
+
+.piece{
+  padding:0 10px;
+}
+
 
 
 #gallery a { text-decoration:none;}
@@ -633,21 +726,76 @@ footer img {
 
 
 .view-button {
+    text-transform: uppercase;
+    font-family: 'Hammersmith One', sans-serif;
+    font-size: .8em;
+    padding: 0px;
+    letter-spacing: .07em;
+    font-weight: lighter;
+    color: #444;
+    margin-left: 20px;
+    border: none;
+    padding-bottom: 5px;
+    color: #999;
 
 }
 
 .view-button--active {
-  background-color:#CCC;
+    border-bottom: 2px solid #222222;
+    color: black;
 }
 
+.view-button:hover {
+    color: black;
+}
+
+@media only screen and (max-width:800px) {
+  header #search { 
+    box-sizing: border-box;
+    position: relative;  
+   
+    margin:40px 0 0 0;  
+  }
+  header .search {
+    box-sizing: border-box;
+    width:100%; 
+    padding-right:20px;
+  }
+  header .view { bottom: 40px; right:0px; }
+}
+
+@media only screen and (max-width:400px) {
+
+  header .view { 
+    position:relative;
+    bottom:0px;
+  }
+  
+  header .view button {
+    background-color: white;
+  }
+  
+  header h1 { 
+  font-size:3em;
+  }
+}
 
 @media only screen and (max-width:600px) {
   body {
     width:auto;
     padding:0 10px;
   }
-  #gallery {
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  #gallery a {
+    flex: 0 0 50%;
+  }
+}
+
+
+
+@media only screen and (min-width:1140px) {
+  
+  #gallery a {
+    flex: 0 0 25%;
   }
 }
 

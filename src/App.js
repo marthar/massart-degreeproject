@@ -104,7 +104,7 @@ function GalleryDetail({entries}) {
       
         <section className="work">
             <div className='work-image'><img src={entry.poster} /></div>
-            <div className="time">
+            <div className="time-block">
               <h2>{entry.time}</h2>
               <a target="_blank"  href={entry.room}><h2 className="button">Join Event</h2></a>
             </div>
@@ -191,13 +191,17 @@ function App() {
             <header>
               <h3>Online Symposium May 12th 2020</h3>
               <h1>Degree Project <br/>Symposium</h1>
-              <h2>MassArt Communication Design Senior Class</h2>
+              <h2>MassArt Communication Design</h2>  
+              <section id='search'>
+                <input type='name' className="search" value={search} placeholder="search" onChange={(e)=>dispatch({type:"SEARCH", value:e.currentTarget.value}) }/>
+                <img className='search-icon' src='./search.svg' width='15' height='15' />
+              </section>
+              <div className="view">
+                <button className={`view-button ${view == 'posters' && "view-button--active"}`} onClick={() => dispatch({type:"VIEW",value:"posters"}) }>Posters</button>
+                <button className={`view-button ${view == 'times' && "view-button--active"}`} onClick={() => dispatch({type:"VIEW",value:"times"}) }>Times</button>
+              </div>
             </header>
-            <section id='search'>
-              <input type='name' className="search" value={search} placeholder="Student Name" onChange={(e)=>dispatch({type:"SEARCH", value:e.currentTarget.value}) }/>
-              <button className={`view-button ${view == 'posters' && "view-button--active"}`} onClick={() => dispatch({type:"VIEW",value:"posters"}) }>Posters</button>
-              <button className={`view-button ${view == 'times' && "view-button--active"}`} onClick={() => dispatch({type:"VIEW",value:"times"}) }>Times</button>
-            </section>
+            
             { view == 'posters' && <section id="gallery">
               {map(runSearch(entries,search), (entry,index) => <GalleryItem entry={entry} key={index} />) }
             </section> }
@@ -208,7 +212,7 @@ function App() {
           <Route path="/:id" children={<GalleryDetail entries={entries} />} />
         </Switch>
       <footer>
-        <h3><img src="./light-logo.png" />621 Huntington Avenue, Boston, MA, 02115 | 617.879.7000 | </h3>
+        <h3><img src="./light-logo.png" />621 Huntington Avenue, Boston, MA, 02115 | 617.879.7000 | &copy; 2020  | <a href="mailto:merettig@massart.edu?Subject=Degree%20Symposium" target="_top"> Contact Us</a></h3>
       </footer>
      </div>
     </Router>
