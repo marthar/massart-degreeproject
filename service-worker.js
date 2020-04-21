@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/massart-portfolios/precache-manifest.da591b6066818ae01b899a5f296be6a8.js"
+  "/massart-portfolios/precache-manifest.1978bf5734ac2259f4f6958d705a78d5.js"
 );
 
 self.addEventListener('message', (event) => {
