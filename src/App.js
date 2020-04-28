@@ -55,7 +55,9 @@ function processEntries(data) {
 
      let slugs = (entry["YouTube Link"]||"").split("/")
      let youtube = slugs[slugs.length-1]
-
+     
+     if(youtube == "") { youtube = null; }
+     
      const name = `${entry['First Name']} ${entry['Last Name']}`;
 
      let startTime = (entry["Time"]||"").split("–")[0];
@@ -111,12 +113,12 @@ function GalleryDetail({entries}) {
             {entry.abstract.split('\n\n').map((item, key) => {
               return <p key={key}>{item}</p>
             })}
-            <div className="video">
+            {entry.youtube && <div className="video">
               <iframe src={`https://www.youtube.com/embed/${entry.youtube}`} frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
-            </div>  
-            <div className="time">
+            </div>}  
+             <div className="time-block">
               <h2>{entry.time}</h2>
-              <a target="_blank" href={entry.room}><h2 className="button">Join Event</h2></a>
+              <a target="_blank"  href={entry.room}><h2 className="button">Join Event</h2></a>
             </div>
         </section>
         </React.Fragment>;
