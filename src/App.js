@@ -75,6 +75,7 @@ function processEntries(data) {
        abstract: entry["Abstract"],
        time: entry["Time"],
        room: entry["Room Link"],
+       room_name: entry['Room Name'],
        youtube: youtube,
        title: entry["Title"],
        start_time: startTime
@@ -106,20 +107,20 @@ function GalleryDetail({entries}) {
       
         <section className="work">
             <div className='work-image'><img src={entry.poster} /></div>
-            <div className="time-block">
-              <h2>{entry.time}</h2>
+             {entry.room != "" && <div className="time-block">
+              <h2>{entry.time}<span className='room'>{entry.room_name}</span> </h2>
               <a target="_blank"  href={entry.room}><h2 className="button">Join Event</h2></a>
-            </div>
+            </div>}
             {entry.abstract.split('\n\n').map((item, key) => {
               return <p key={key}>{item}</p>
             })}
             {entry.youtube && <div className="video">
               <iframe src={`https://www.youtube.com/embed/${entry.youtube}`} frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
             </div>}  
-             <div className="time-block">
-              <h2>{entry.time}</h2>
-              <a target="_blank"  href={entry.room}><h2 className="button">Join Event</h2></a>
-            </div>
+             {entry.room != "" && <div className="time-block">
+              <h2>{entry.time}<span className='room'>{entry.room_name}</span> </h2>
+ <a target="_blank"  href={entry.room}><h2 className="button">Join Event</h2></a>
+            </div>}
         </section>
         </React.Fragment>;
 }

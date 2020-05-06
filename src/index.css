@@ -557,8 +557,11 @@ header .view {
 
 .time-block h2 { 
   padding: 10px 0px 10px 0;
+  font-weight:500;
   
 }
+
+.time-block .room { font-weight:300; padding-left:20px; font-size:1em;}
 
 
 h2.button {
