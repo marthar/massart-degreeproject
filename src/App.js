@@ -3,7 +3,7 @@ import './App.css';
 import React, { useReducer, useRef, useEffect, useLayoutEffect, useCallback, forwardRef } from "react"
 import PropTypes from 'prop-types';
 
-import Tabletop from "tabletop"
+import Papa from "papaparse"
 
 import { map, keys, find, filter, sortBy, groupBy, uniqBy } from "lodash"
 
@@ -177,13 +177,10 @@ function App() {
 
 
   useEffect(() => { 
-    Tabletop.init( {
-      key: 'https://docs.google.com/spreadsheets/d/1lzAodBh1ohPURnCNYbx-CgA00TEzRFi4G4qE7_Z3UX0/edit?usp=sharing',
-      simpleSheet: true }
-    ).then(function(data, tabletop) { 
-      dispatch({ type: "ENTRIES", entries: processEntries(data) })
-   }) }, []);
-
+     Papa.parse("./data.csv", { download: true, header: true, complete: (results) => {
+      dispatch({ type: "ENTRIES", entries: processEntries(results.data)})
+     }})
+   }, []);
 
 
   return (
