@@ -50,8 +50,8 @@ function processEntries(data) {
      thumb = thumb.split("=")[1]
      poster = poster.split("=")[1]
 
-     thumb = "https://drive.google.com/uc?export=download&id=" + thumb;
-     poster = "https://drive.google.com/uc?export=download&id=" + poster;
+     thumb = "https://lh3.googleusercontent.com/d/" + thumb;
+     poster = "https://lh3.googleusercontent.com/d/" + poster;
 
      let slugs = (entry["YouTube Link"]||"").split("/")
      let youtube = slugs[slugs.length-1]
